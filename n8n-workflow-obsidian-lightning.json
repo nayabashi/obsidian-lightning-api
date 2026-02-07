@@ -1,5 +1,5 @@
 {
-  "name": "⚡️ Obsidian Lightning Index Generator",
+  "name": "My workflow",
   "nodes": [
     {
       "parameters": {
@@ -15,8 +15,11 @@
       "name": "Schedule Trigger",
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1,
-      "position": [250, 300],
-      "id": "node-1"
+      "position": [
+        0,
+        0
+      ],
+      "id": "d5fa7ef5-25dc-4e44-bfe3-59d2266f7ad9"
     },
     {
       "parameters": {
@@ -28,12 +31,15 @@
       "name": "Get Repository Tree",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [450, 300],
-      "id": "node-2",
+      "position": [
+        208,
+        0
+      ],
+      "id": "722a54c5-3c01-407d-849a-e2ee6791a20e",
       "credentials": {
         "httpHeaderAuth": {
-          "id": "GITHUB_PAT_CREDENTIAL_ID",
-          "name": "GitHub PAT"
+          "id": "CZ7bSKSKRrjFkx2M",
+          "name": "Header Auth account"
         }
       }
     },
@@ -44,8 +50,11 @@
       "name": "Filter Target Files",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [650, 300],
-      "id": "node-3"
+      "position": [
+        400,
+        0
+      ],
+      "id": "89363ae2-2b9d-47d7-81c9-49b91da34ec5"
     },
     {
       "parameters": {
@@ -63,24 +72,30 @@
       "name": "Get File Content",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [1050, 300],
-      "id": "node-5",
+      "position": [
+        816,
+        112
+      ],
+      "id": "9699e9e6-6519-4635-8f6a-b58437b1a8da",
       "credentials": {
         "httpHeaderAuth": {
-          "id": "GITHUB_PAT_CREDENTIAL_ID",
-          "name": "GitHub PAT"
+          "id": "CZ7bSKSKRrjFkx2M",
+          "name": "Header Auth account"
         }
       }
     },
     {
       "parameters": {
-        "jsCode": "const results = [];\n\nfor (const item of $input.all()) {\n  const inputData = item.json;\n  const content = Buffer.from(inputData.content, 'base64').toString('utf-8');\n  \n  // frontmatter抽出\n  const hasFrontmatter = content.startsWith('---');\n  let metadata = { tags: [] };\n  \n  if (hasFrontmatter) {\n    const fmMatch = content.match(/^---\\n([\\s\\S]*?)\\n---/);\n    if (fmMatch) {\n      const fmText = fmMatch[1];\n      \n      // タグ抽出（簡易版）\n      const tagsMatch = fmText.match(/tags:\\s*\\[([^\\]]*)\\]/);\n      if (tagsMatch) {\n        metadata.tags = tagsMatch[1].split(',').map(t => t.trim().replace(/[\"']/g, ''));\n      }\n    }\n  }\n  \n  // 冒頭100文字のヒント（frontmatter除外後）\n  let bodyContent = content;\n  if (hasFrontmatter) {\n    bodyContent = content.replace(/^---\\n[\\s\\S]*?\\n---\\n?/, '');\n  }\n  const wordHint = bodyContent.substring(0, 100).replace(/\\n/g, ' ');\n  \n  results.push({\n    path: inputData.path,\n    has_meta: hasFrontmatter,\n    char_count: content.length,\n    word_hint: wordHint,\n    tags: metadata.tags\n  });\n}\n\nreturn results.map(r => ({ json: r }));"
+        "jsCode": "const results = [];\n\nfor (const item of $input.all()) {\n  const inputData = item.json;\n  const content = Buffer.from(inputData.content, 'base64').toString('utf-8');\n  \n  // frontmatter抽出\n  const hasFrontmatter = content.startsWith('---');\n  let metadata = { tags: [] };\n  \n  if (hasFrontmatter) {\n    const fmMatch = content.match(/^---\\n([\\s\\S]*?)\\n---/);\n    if (fmMatch) {\n      const fmText = fmMatch[1];\n      const tagsMatch = fmText.match(/tags:\\s*\\[([^\\]]*)\\]/);\n      if (tagsMatch) {\n        metadata.tags = tagsMatch[1].split(',').map(t => t.trim().replace(/[\"']/g, ''));\n      }\n    }\n  }\n  \n  let bodyContent = content;\n  if (hasFrontmatter) {\n    bodyContent = content.replace(/^---\\n[\\s\\S]*?\\n---\\n?/, '');\n  }\n  const wordHint = bodyContent.substring(0, 100).replace(/\\n/g, ' ');\n  \n  results.push({\n    path: inputData.path,\n    has_meta: hasFrontmatter,\n    char_count: content.length,\n    word_hint: wordHint,\n    tags: metadata.tags\n  });\n}\n\nreturn results.map(r => ({ json: r }));"
       },
       "name": "Extract Metadata",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [1250, 300],
-      "id": "node-6"
+      "position": [
+        1120,
+        128
+      ],
+      "id": "a8e12df7-7753-42b1-ac1a-d150121feadf"
     },
     {
       "parameters": {
@@ -89,8 +104,11 @@
       "name": "Generate index.json",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [1650, 300],
-      "id": "node-8"
+      "position": [
+        1408,
+        0
+      ],
+      "id": "0bc7f4e8-f14b-4f1c-9fb9-a8a17bcf01cb"
     },
     {
       "parameters": {
@@ -108,22 +126,25 @@
       "name": "Get Current File SHA",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [1850, 300],
-      "id": "node-9",
-      "continueOnFail": true,
+      "position": [
+        1600,
+        0
+      ],
+      "id": "e3ac9609-24e7-4f4c-a551-ef9baee8cddb",
       "credentials": {
         "httpHeaderAuth": {
-          "id": "GITHUB_PAT_CREDENTIAL_ID_2",
-          "name": "GitHub PAT (API repo)"
+          "id": "6AxV9PNVEVou47KL",
+          "name": "Header Auth account 2"
         }
-      }
+      },
+      "continueOnFail": true
     },
     {
       "parameters": {
+        "method": "PUT",
         "url": "https://api.github.com/repos/nayabashi/obsidian-lightning-api/contents/index.json",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
-        "method": "PUT",
         "sendBody": true,
         "bodyParameters": {
           "parameters": [
@@ -133,11 +154,11 @@
             },
             {
               "name": "content",
-              "value": "{{ $('Generate index.json').first().json.content }}"
+              "value": "={{ $('Generate index.json').first().json.content }}"
             },
             {
               "name": "sha",
-              "value": "{{ $('Get Current File SHA').first().json.sha }}"
+              "value": "={{ $('Get Current File SHA').first().json.sha }}"
             }
           ]
         },
@@ -146,16 +167,20 @@
       "name": "Update GitHub File",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [2050, 300],
-      "id": "node-10",
+      "position": [
+        1808,
+        0
+      ],
+      "id": "0788969e-9474-44f8-b99d-bf74d2bf2cb6",
       "credentials": {
         "httpHeaderAuth": {
-          "id": "GITHUB_PAT_CREDENTIAL_ID_2",
-          "name": "GitHub PAT (API repo)"
+          "id": "6AxV9PNVEVou47KL",
+          "name": "Header Auth account 2"
         }
       }
     }
   ],
+  "pinData": {},
   "connections": {
     "Schedule Trigger": {
       "main": [
@@ -235,13 +260,14 @@
       ]
     }
   },
-  "pinData": {},
+  "active": true,
   "settings": {
     "executionOrder": "v1"
   },
-  "staticData": null,
-  "tags": [],
-  "triggerCount": 1,
-  "updatedAt": "2026-02-07T00:00:00.000Z",
-  "versionId": "1"
+  "versionId": "aea71eb7-9aa9-4db0-8157-12ca3f600da7",
+  "meta": {
+    "instanceId": "d7a7fadd486955e41d5ae014c8948e65e87fd4808308cb31a278a152810f1e58"
+  },
+  "id": "kqGZ1sVi9lXvrn3J",
+  "tags": []
 }
