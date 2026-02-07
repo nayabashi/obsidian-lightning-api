@@ -49,7 +49,7 @@
     },
     {
       "parameters": {
-        "batchSize": 10,
+        "batchSize": 250,
         "options": {}
       },
       "name": "Split In Batches",
@@ -94,16 +94,8 @@
       "id": "node-6"
     },
     {
-      "parameters": {},
-      "name": "Loop Back",
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [1450, 300],
-      "id": "node-7"
-    },
-    {
       "parameters": {
-        "jsCode": "const items = $input.all();\n\nconst index = {\n  generated_at: new Date().toISOString(),\n  source: 'nayabashi/Obsidian',\n  total_notes: items.length,\n  notes: items.map(item => ({\n    path: item.json.path,\n    has_meta: item.json.has_meta,\n    char_count: item.json.char_count,\n    word_hint: item.json.word_hint,\n    tags: item.json.tags || []\n  }))\n};\n\nreturn {\n  json: {\n    content: JSON.stringify(index, null, 2)\n  }\n};"
+        "jsCode": "const items = $input.all();\n\nconst index = {\n  generated_at: new Date().toISOString(),\n  source: 'nayabashi/Obsidian',\n  total_notes: items.length,\n  notes: items.map(item => ({\n    path: item.json.path,\n    has_meta: item.json.has_meta,\n    char_count: item.json.char_count,\n    word_hint: item.json.word_hint,\n    tags: item.json.tags || []\n  }))\n};\n\nconst jsonString = JSON.stringify(index, null, 2);\nconst base64Content = Buffer.from(jsonString).toString('base64');\n\nreturn {\n  json: {\n    content: base64Content\n  }\n};"
       },
       "name": "Generate index.json",
       "type": "n8n-nodes-base.code",
@@ -152,11 +144,11 @@
             },
             {
               "name": "content",
-              "value": "={{ Buffer.from($('Generate index.json').item.json.content).toString('base64') }}"
+              "value": "{{ $('Generate index.json').first().json.content }}"
             },
             {
               "name": "sha",
-              "value": "={{ $('Get Current File SHA').item.json.sha || '' }}"
+              "value": "{{ $('Get Current File SHA').first().json.sha }}"
             }
           ]
         },
@@ -233,24 +225,7 @@
     },
     "Extract Metadata": {
       "main": [
-        [
-          {
-            "node": "Loop Back",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Loop Back": {
-      "main": [
-        [
-          {
-            "node": "Split In Batches",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Split In Batches": {
