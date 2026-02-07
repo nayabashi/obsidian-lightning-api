@@ -76,24 +76,47 @@ Get Repository Tree (Obsidianリポジトリ全体取得)
   ↓
 Filter Target Files (03_思考の森, 06_知識のメモのみ抽出)
   ↓
-Split In Batches (10件ずつ処理)
-  ↓
-Get File Content (ファイル内容取得)
-  ↓
-Extract Metadata (メタ情報抽出)
-  ↓
-Loop Back (次のバッチへ)
-  ↓
-Generate index.json (JSON生成)
-  ↓
-Get Current File SHA (既存ファイルのSHA取得)
-  ↓
-Update GitHub File (index.json更新)
+Split In Batches (250件で一括処理)
+  ├─ 上出力 → Get File Content (ファイル内容取得)
+  │              ↓
+  │          Extract Metadata (メタ情報抽出)
+  └─ 下出力 → Generate index.json (JSON生成・Base64エンコード)
+                 ↓
+             Get Current File SHA (既存ファイルのSHA取得)
+                 ↓
+             Update GitHub File (index.json更新)
 ```
 
 ---
 
-## 🔍 トラブルシューティング
+## � 重要な設定ポイント
+
+### Generate index.json ノード
+
+JavaScriptコードの最後で**Base64エンコード済みの値**を返すこと：
+
+```javascript
+const jsonString = JSON.stringify(index, null, 2);
+const base64Content = Buffer.from(jsonString).toString('base64');
+
+return {
+  json: {
+    content: base64Content
+  }
+};
+```
+
+### Update GitHub File ノード - Body Parameters
+
+1. **message**: `Update index.json for 雷アプリ`
+2. **content**: `{{ $('Generate index.json').first().json.content }}`
+3. **sha**: `{{ $('Get Current File SHA').first().json.sha }}`
+
+**注意**: `{{` と `}}` の間にスペースなし、`=` を先頭につけない
+
+---
+
+## �🔍 トラブルシューティング
 
 ### エラー: "Bad credentials"
 - GitHub PATが正しく設定されていない
@@ -144,9 +167,10 @@ Split In Batchesノードの `batchSize` を変更：
 - 大きい値: 高速だがAPI制限リスク
 - 小さい値: 安全だが時間がかかる
 
----
-
-## ✅ 確認事項
+---は **250** を推奨：
+- 219ファイルを1回で処理（ループ不要）
+- API制限内で安全に動作
+- シンプルな構成で保守しやすい
 
 - [ ] GitHub PAT 2つ作成済み
 - [ ] n8nにCredential 2つ追加済み
