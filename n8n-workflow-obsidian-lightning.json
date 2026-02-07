@@ -49,17 +49,6 @@
     },
     {
       "parameters": {
-        "batchSize": 250,
-        "options": {}
-      },
-      "name": "Split In Batches",
-      "type": "n8n-nodes-base.splitInBatches",
-      "typeVersion": 3,
-      "position": [850, 300],
-      "id": "node-4"
-    },
-    {
-      "parameters": {
         "url": "={{ $json.url }}",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
@@ -85,7 +74,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const inputData = $input.item.json;\nconst content = Buffer.from(inputData.content, 'base64').toString('utf-8');\n\n// frontmatter抽出\nconst hasFrontmatter = content.startsWith('---');\nlet metadata = { tags: [] };\n\nif (hasFrontmatter) {\n  const fmMatch = content.match(/^---\\n([\\s\\S]*?)\\n---/);\n  if (fmMatch) {\n    const fmText = fmMatch[1];\n    \n    // タグ抽出（簡易版）\n    const tagsMatch = fmText.match(/tags:\\s*\\[([^\\]]*)\\]/);\n    if (tagsMatch) {\n      metadata.tags = tagsMatch[1].split(',').map(t => t.trim().replace(/[\"']/g, ''));\n    }\n  }\n}\n\n// 冒頭100文字のヒント（frontmatter除外後）\nlet bodyContent = content;\nif (hasFrontmatter) {\n  bodyContent = content.replace(/^---\\n[\\s\\S]*?\\n---\\n?/, '');\n}\nconst wordHint = bodyContent.substring(0, 100).replace(/\\n/g, ' ');\n\nreturn {\n  json: {\n    path: inputData.path,\n    has_meta: hasFrontmatter,\n    char_count: content.length,\n    word_hint: wordHint,\n    tags: metadata.tags\n  }\n};"
+        "jsCode": "const results = [];\n\nfor (const item of $input.all()) {\n  const inputData = item.json;\n  const content = Buffer.from(inputData.content, 'base64').toString('utf-8');\n  \n  // frontmatter抽出\n  const hasFrontmatter = content.startsWith('---');\n  let metadata = { tags: [] };\n  \n  if (hasFrontmatter) {\n    const fmMatch = content.match(/^---\\n([\\s\\S]*?)\\n---/);\n    if (fmMatch) {\n      const fmText = fmMatch[1];\n      \n      // タグ抽出（簡易版）\n      const tagsMatch = fmText.match(/tags:\\s*\\[([^\\]]*)\\]/);\n      if (tagsMatch) {\n        metadata.tags = tagsMatch[1].split(',').map(t => t.trim().replace(/[\"']/g, ''));\n      }\n    }\n  }\n  \n  // 冒頭100文字のヒント（frontmatter除外後）\n  let bodyContent = content;\n  if (hasFrontmatter) {\n    bodyContent = content.replace(/^---\\n[\\s\\S]*?\\n---\\n?/, '');\n  }\n  const wordHint = bodyContent.substring(0, 100).replace(/\\n/g, ' ');\n  \n  results.push({\n    path: inputData.path,\n    has_meta: hasFrontmatter,\n    char_count: content.length,\n    word_hint: wordHint,\n    tags: metadata.tags\n  });\n}\n\nreturn results.map(r => ({ json: r }));"
       },
       "name": "Extract Metadata",
       "type": "n8n-nodes-base.code",
@@ -194,17 +183,6 @@
       "main": [
         [
           {
-            "node": "Split In Batches",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Split In Batches": {
-      "main": [
-        [
-          {
             "node": "Get File Content",
             "type": "main",
             "index": 0
@@ -225,12 +203,6 @@
     },
     "Extract Metadata": {
       "main": [
-        []
-      ]
-    },
-    "Split In Batches": {
-      "main": [
-        null,
         [
           {
             "node": "Generate index.json",

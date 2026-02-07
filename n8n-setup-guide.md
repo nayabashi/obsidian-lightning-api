@@ -76,21 +76,43 @@ Get Repository Tree (Obsidianリポジトリ全体取得)
   ↓
 Filter Target Files (03_思考の森, 06_知識のメモのみ抽出)
   ↓
-Split In Batches (250件で一括処理)
-  ├─ 上出力 → Get File Content (ファイル内容取得)
-  │              ↓
-  │          Extract Metadata (メタ情報抽出)
-  └─ 下出力 → Generate index.json (JSON生成・Base64エンコード)
-                 ↓
-             Get Current File SHA (既存ファイルのSHA取得)
-                 ↓
-             Update GitHub File (index.json更新)
+Get File Content (ファイル内容取得)
+  ↓
+Extract Metadata (メタ情報抽出・全件ループ処理)
+  ↓
+Generate index.json (JSON生成・Base64エンコード)
+  ↓
+Get Current File SHA (既存ファイルのSHA取得)
+  ↓
+Update GitHub File (index.json更新)
 ```
 
 ---
 
 ## � 重要な設定ポイント
+### Extract Metadata ノード（全件ループ処理）
 
+**重要**: `$input.all()`を使って全ファイルをループ処理すること：
+
+```javascript
+const results = [];
+
+for (const item of $input.all()) {
+  const inputData = item.json;
+  // ... 処理 ...
+  results.push({
+    path: ...,
+    has_meta: ...,
+    char_count: ...,
+    word_hint: ...,
+    tags: ...
+  });
+}
+
+return results.map(r => ({ json: r }));
+```
+
+**理由**: 1件ずつ処理する`$input.item.json`では、複数ファイルを正しく処理できません。219件を正しく処理するには`$input.all()`で全件をループ処理する必要があります。
 ### Generate index.json ノード
 
 JavaScriptコードの最後で**Base64エンコード済みの値**を返すこと：
@@ -133,9 +155,10 @@ return {
 - ブランチ名が `main` ではない
 - PATの権限が不足している
 
-### ワークフローが途中で止まる
-- Split In Batchesのバッチサイズを減らす（10 → 5）
-- タイムアウト設定を確認
+### ワークフローが途中で止まる・1件しか処理されない
+- Extract Metadataで`$input.all()`ループ処理を使用しているか確認
+- Extract Metadataのコードで`$input.item.json`を使っていると1件しか処理されない
+- Split In Batchesノードは不要（削除済み）
 
 ---
 
@@ -161,18 +184,18 @@ const targetPaths = [
 ];
 ```
 
-### バッチサイズの調整
+### 処理ファイル数の確認
 
-Split In Batchesノードの `batchSize` を変更：
-- 大きい値: 高速だがAPI制限リスク
-- 小さい値: 安全だが時間がかかる
+現在の構成（直線処理）:
+- **219ファイル**: 03_思考の森/ (144件) + 06_知識のメモ/ (75件)
+- **処理結果**: Extract Metadataの`$input.all()`ループ処理により、全件を一度に処理
+- **成功実績**: 2026-02-07に219件処理完了
 
----は **250** を推奨：
-- 219ファイルを1回で処理（ループ不要）
-- API制限内で安全に動作
-- シンプルな構成で保守しやすい
+**注意**: Split In Batchesノードは不要です（削除済み）。Extract Metadataで全件をループ処理します。
 
-- [ ] GitHub PAT 2つ作成済み
+---
+
+## ✅ セットアップチェックリスト
 - [ ] n8nにCredential 2つ追加済み
 - [ ] ワークフローインポート済み
 - [ ] Credential紐付け完了
