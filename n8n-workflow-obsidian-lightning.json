@@ -1,0 +1,300 @@
+{
+  "name": "⚡️ Obsidian Lightning Index Generator",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 2 * * *"
+            }
+          ]
+        }
+      },
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "id": "node-1"
+    },
+    {
+      "parameters": {
+        "url": "https://api.github.com/repos/nayabashi/Obsidian/git/trees/main?recursive=1",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "name": "Get Repository Tree",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [450, 300],
+      "id": "node-2",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "GITHUB_PAT_CREDENTIAL_ID",
+          "name": "GitHub PAT"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const targetPaths = ['03_思考の森/', '06_知識のメモ/'];\nconst tree = $input.item.json.tree || [];\n\nconst mdFiles = tree.filter(file => {\n  return file.type === 'blob' &&\n         file.path.endsWith('.md') &&\n         targetPaths.some(path => file.path.startsWith(path));\n});\n\nreturn mdFiles.map(file => ({\n  json: {\n    path: file.path,\n    sha: file.sha,\n    url: `https://api.github.com/repos/nayabashi/Obsidian/contents/${file.path}`\n  }\n}));"
+      },
+      "name": "Filter Target Files",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [650, 300],
+      "id": "node-3"
+    },
+    {
+      "parameters": {
+        "batchSize": 10,
+        "options": {}
+      },
+      "name": "Split In Batches",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [850, 300],
+      "id": "node-4"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "name": "Get File Content",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1050, 300],
+      "id": "node-5",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "GITHUB_PAT_CREDENTIAL_ID",
+          "name": "GitHub PAT"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const inputData = $input.item.json;\nconst content = Buffer.from(inputData.content, 'base64').toString('utf-8');\n\n// frontmatter抽出\nconst hasFrontmatter = content.startsWith('---');\nlet metadata = { tags: [] };\n\nif (hasFrontmatter) {\n  const fmMatch = content.match(/^---\\n([\\s\\S]*?)\\n---/);\n  if (fmMatch) {\n    const fmText = fmMatch[1];\n    \n    // タグ抽出（簡易版）\n    const tagsMatch = fmText.match(/tags:\\s*\\[([^\\]]*)\\]/);\n    if (tagsMatch) {\n      metadata.tags = tagsMatch[1].split(',').map(t => t.trim().replace(/[\"']/g, ''));\n    }\n  }\n}\n\n// 冒頭100文字のヒント（frontmatter除外後）\nlet bodyContent = content;\nif (hasFrontmatter) {\n  bodyContent = content.replace(/^---\\n[\\s\\S]*?\\n---\\n?/, '');\n}\nconst wordHint = bodyContent.substring(0, 100).replace(/\\n/g, ' ');\n\nreturn {\n  json: {\n    path: inputData.path,\n    has_meta: hasFrontmatter,\n    char_count: content.length,\n    word_hint: wordHint,\n    tags: metadata.tags\n  }\n};"
+      },
+      "name": "Extract Metadata",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1250, 300],
+      "id": "node-6"
+    },
+    {
+      "parameters": {},
+      "name": "Loop Back",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [1450, 300],
+      "id": "node-7"
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\n\nconst index = {\n  generated_at: new Date().toISOString(),\n  source: 'nayabashi/Obsidian',\n  total_notes: items.length,\n  notes: items.map(item => ({\n    path: item.json.path,\n    has_meta: item.json.has_meta,\n    char_count: item.json.char_count,\n    word_hint: item.json.word_hint,\n    tags: item.json.tags || []\n  }))\n};\n\nreturn {\n  json: {\n    content: JSON.stringify(index, null, 2)\n  }\n};"
+      },
+      "name": "Generate index.json",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1650, 300],
+      "id": "node-8"
+    },
+    {
+      "parameters": {
+        "url": "https://api.github.com/repos/nayabashi/obsidian-lightning-api/contents/index.json",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "name": "Get Current File SHA",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1850, 300],
+      "id": "node-9",
+      "continueOnFail": true,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "GITHUB_PAT_CREDENTIAL_ID_2",
+          "name": "GitHub PAT (API repo)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://api.github.com/repos/nayabashi/obsidian-lightning-api/contents/index.json",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "method": "PUT",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "message",
+              "value": "Update index.json for 雷アプリ"
+            },
+            {
+              "name": "content",
+              "value": "={{ Buffer.from($('Generate index.json').item.json.content).toString('base64') }}"
+            },
+            {
+              "name": "sha",
+              "value": "={{ $('Get Current File SHA').item.json.sha || '' }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Update GitHub File",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [2050, 300],
+      "id": "node-10",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "GITHUB_PAT_CREDENTIAL_ID_2",
+          "name": "GitHub PAT (API repo)"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get Repository Tree",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Repository Tree": {
+      "main": [
+        [
+          {
+            "node": "Filter Target Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter Target Files": {
+      "main": [
+        [
+          {
+            "node": "Split In Batches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split In Batches": {
+      "main": [
+        [
+          {
+            "node": "Get File Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get File Content": {
+      "main": [
+        [
+          {
+            "node": "Extract Metadata",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Metadata": {
+      "main": [
+        [
+          {
+            "node": "Loop Back",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Back": {
+      "main": [
+        [
+          {
+            "node": "Split In Batches",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split In Batches": {
+      "main": [
+        null,
+        [
+          {
+            "node": "Generate index.json",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate index.json": {
+      "main": [
+        [
+          {
+            "node": "Get Current File SHA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Current File SHA": {
+      "main": [
+        [
+          {
+            "node": "Update GitHub File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2026-02-07T00:00:00.000Z",
+  "versionId": "1"
+}
