@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-03-05T17:00:04.885Z",
+  "generated_at": "2026-03-06T17:00:04.869Z",
   "source": "nayabashi/Obsidian",
-  "total_notes": 194,
+  "total_notes": 195,
   "notes": [
     {
       "path": "03_思考の森/2025-05-07 価値観チェックイン.md",
@@ -1096,6 +1096,13 @@
       "has_meta": false,
       "char_count": 1675,
       "word_hint": "[1番しんどかったと振り返る](https://togetter.com/li/2579848)  ・スライドは必ずリード文から書け ・リード文に「下記に示す」「以下の通り…」的な文章を使うな ・リー",
+      "tags": []
+    },
+    {
+      "path": "06_知識のメモ/ソマティック・マーカー（Somatic Marker）.md",
+      "has_meta": false,
+      "char_count": 1028,
+      "word_hint": "# ソマティック・マーカー（Somatic Marker）  ## 概要 意思決定において、身体反応（感情・感覚）が判断のヒントとして機能するという神経科学の理論。  提唱者： アントニオ・ダマシオ ",
       "tags": []
     },
     {
