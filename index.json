@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-03-07T17:00:04.718Z",
+  "generated_at": "2026-03-08T17:00:04.441Z",
   "source": "nayabashi/Obsidian",
-  "total_notes": 196,
+  "total_notes": 197,
   "notes": [
     {
       "path": "03_思考の森/2025-05-07 価値観チェックイン.md",
@@ -1167,6 +1167,13 @@
       "has_meta": false,
       "char_count": 1818,
       "word_hint": "# ユニファイドコマース (Unified Commerce) とは？  ユニファイドコマースとは、「顧客に関わる全てのシステムを、最初から一つのプラットフォームに統合する」という考え方、およびそのシ",
+      "tags": []
+    },
+    {
+      "path": "06_知識のメモ/予測処理理論（Predictive Processing）.md",
+      "has_meta": false,
+      "char_count": 1289,
+      "word_hint": "# 予測処理理論（Predictive Processing）  ## 概要 予測処理理論（Predictive Processing）は、 「脳は外界を受動的に知覚しているのではなく、世界を予測し、",
       "tags": []
     },
     {
