@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-03-12T17:00:04.565Z",
+  "generated_at": "2026-03-13T09:21:47.298Z",
   "source": "nayabashi/Obsidian",
-  "total_notes": 200,
+  "total_notes": 201,
   "notes": [
     {
       "path": "03_思考の森/2025-05-07 価値観チェックイン.md",
@@ -46,7 +46,7 @@
     {
       "path": "03_思考の森/MOC_価値観ライブラリ.md",
       "has_meta": true,
-      "char_count": 1194,
+      "char_count": 1193,
       "word_hint": " # 🗺️ MOC：価値観ライブラリ  ## 📋 このMOCについて 自分の価値観を整理・更新し続けるためのナビゲーションです。  ## ⭐ マスターファイル - **[[価値観_最新版]]** ",
       "tags": [
         "MOC",
@@ -172,7 +172,7 @@
     {
       "path": "03_思考の森/🌱 思考の森の育成サイクル設計.md",
       "has_meta": false,
-      "char_count": 9055,
+      "char_count": 9054,
       "word_hint": "# 🌲 思考の森の育成サイクル設計 ## 知識生態系の持続的成長システム  --- tags: [システム設計, 知識管理, PKM, メタ認知, 継続的改善, MCP, 自動化] created:",
       "tags": []
     },
@@ -853,7 +853,7 @@
     {
       "path": "06_知識の海/AI活用アイディア全量調査_手順書.md",
       "has_meta": false,
-      "char_count": 1581,
+      "char_count": 1579,
       "word_hint": "# AI活用アイディア全量調査_手順書  --- tags: [AI活用, 調査手順, 企画提案, 作業計画] created: 2025-01-15 ---  ## 🎯 調査目的 社内AI活用案募",
       "tags": []
     },
@@ -881,7 +881,7 @@
     {
       "path": "06_知識の海/Bullet Journaling と Interstitial Journaling の比較メモ.md",
       "has_meta": false,
-      "char_count": 1111,
+      "char_count": 1110,
       "word_hint": "# Bullet Journaling と Interstitial Journaling の比較メモ  ## 📌 概要  - **Bullet Journaling**（バレットジャーナル）と *",
       "tags": []
     },
@@ -897,6 +897,13 @@
       "has_meta": false,
       "char_count": 1305,
       "word_hint": "# Claude Code / Skills / Agent 設計の良記事まとめ  ## 🔗 元記事 - タイトル（参考）: Claude Code 超完全ガイド - URL: https://no",
+      "tags": []
+    },
+    {
+      "path": "06_知識の海/Cognitive Apprenticeship（認知的徒弟制度）解説メモ.md",
+      "has_meta": false,
+      "char_count": 2210,
+      "word_hint": "# Cognitive Apprenticeship（認知的徒弟制度）解説メモ  ## 1. 概念 Cognitive Apprenticeship（認知的徒弟制度）は   熟練者が持つ「思考プロセス",
       "tags": []
     },
     {
@@ -948,7 +955,7 @@
     {
       "path": "06_知識の海/GitHub認証メモ：アクセストークンとOAuthの違い.md",
       "has_meta": false,
-      "char_count": 1505,
+      "char_count": 1504,
       "word_hint": "## GitHub認証メモ：アクセストークンとOAuthの違い  ### 🔑 アクセストークン（PAT: Personal Access Token）とは  - 自分がGitHub上で発行する「アプ",
       "tags": []
     },
@@ -967,24 +974,17 @@
       "tags": []
     },
     {
-<<<<<<< HEAD
-      "path": "06_知識のメモ/Judgment Research Map.md",
+      "path": "06_知識の海/Judgment Research Map.md",
       "has_meta": false,
       "char_count": 1702,
       "word_hint": "Judgment Research Map ===================== 2026-03-07 Core Theme ---------- Judgment Architecture 判",
       "tags": []
     },
     {
-      "path": "06_知識のメモ/MOC_知識のメモ.md",
-      "has_meta": true,
-      "char_count": 2623,
-      "word_hint": " # 🗺️ MOC：知識のメモ  ## 📋 このMOCについて 技術、ビジネス、思想、歴史など、様々な知識を整理したMap of Content（MOC）です。  ## 🤖 AI・技術  ###",
-=======
       "path": "06_知識の海/MOC_知識の海.md",
       "has_meta": true,
-      "char_count": 2624,
-      "word_hint": " # 🗺️ MOC：知識の海  ## 📋 このMOCについて 技術、ビジネス、思想、歴史など、様々な知識を整理したMap of Content（MOC）です。  ## 🤖 AI・技術  ###",
->>>>>>> 004f77b (chore: update lightning paths for 知識の海)
+      "char_count": 2636,
+      "word_hint": " # 🗺️ MOC：知識の海  ## 📋 このMOCについて 技術、ビジネス、思想、歴史などの中から、あとで何度も参照したい知識を蓄えるためのMap of Content（MOC）です。  ## ",
       "tags": [
         "MOC",
         "知識",
@@ -1065,7 +1065,7 @@
     {
       "path": "06_知識の海/obsidian活用メモ.md",
       "has_meta": false,
-      "char_count": 1762,
+      "char_count": 1761,
       "word_hint": "### 他のZettelkastenユーザーが行っていること / あなたのシステムでさらに探求できる可能性:  1.  **アトミックなノート (Atomic Notes) の徹底:**     * ",
       "tags": []
     },
@@ -1139,16 +1139,16 @@
       "tags": []
     },
     {
-  "path": "06_知識の海/ソマティック・マーカー（Somatic Marker）.md",
-  "has_meta": false,
-  "char_count": 1028,
-  "word_hint": "# ソマティック・マーカー（Somatic Marker）  ## 概要 意思決定において、身体反応（感情・感覚）が判断のヒントとして機能するという神経科学の理論。  提唱者： アントニオ・ダマシオ ",
-  "tags": []
+      "path": "06_知識の海/ソマティック・マーカー（Somatic Marker）.md",
+      "has_meta": false,
+      "char_count": 1028,
+      "word_hint": "# ソマティック・マーカー（Somatic Marker）  ## 概要 意思決定において、身体反応（感情・感覚）が判断のヒントとして機能するという神経科学の理論。  提唱者： アントニオ・ダマシオ ",
+      "tags": []
     },
     {
       "path": "06_知識の海/デジタル経済レポート2024（経産省）.md",
       "has_meta": false,
-      "char_count": 1037,
+      "char_count": 1036,
       "word_hint": "## 📘 デジタル経済レポート2024（経産省）  - **読了日**：2025-05-29 - **参照資料**：https://www.meti.go.jp/policy/it_policy/s",
       "tags": []
     },
@@ -1203,18 +1203,14 @@
       "tags": []
     },
     {
-<<<<<<< HEAD
-      "path": "06_知識のメモ/予測処理理論（Predictive Processing）.md",
+      "path": "06_知識の海/予測処理理論（Predictive Processing）.md",
       "has_meta": false,
       "char_count": 1289,
       "word_hint": "# 予測処理理論（Predictive Processing）  ## 概要 予測処理理論（Predictive Processing）は、 「脳は外界を受動的に知覚しているのではなく、世界を予測し、",
       "tags": []
     },
     {
-      "path": "06_知識のメモ/会社PC_スペック情報.md",
-=======
       "path": "06_知識の海/会社PC_スペック情報.md",
->>>>>>> 004f77b (chore: update lightning paths for 知識の海)
       "has_meta": false,
       "char_count": 926,
       "word_hint": "# 会社PC スペック情報  **記録日**: 2025-11-28  ## 💻 モデル情報 - **モデル番号**: EB0519 - **製品名**: HP EliteBook X G1i 14",
@@ -1286,7 +1282,7 @@
     {
       "path": "06_知識の海/宇宙世紀（UC）年表と作品・人物の関係まとめ.md",
       "has_meta": false,
-      "char_count": 1945,
+      "char_count": 1943,
       "word_hint": "# 宇宙世紀（UC）年表と作品・人物の関係まとめ  ## 概要 50歳を過ぎて再び触れた宇宙世紀シリーズ。   ユニコーン・ハサウェイを経て、改めて**ファーストから連なる思想の流れ**を捉えるための",
       "tags": []
     },
@@ -1326,18 +1322,14 @@
       "tags": []
     },
     {
-<<<<<<< HEAD
-      "path": "06_知識のメモ/直線と曲線のプロジェクトマネジメント（両利きのPM  Complex Systems）.md",
+      "path": "06_知識の海/直線と曲線のプロジェクトマネジメント（両利きのPM  Complex Systems）.md",
       "has_meta": false,
       "char_count": 1224,
       "word_hint": "# 直線と曲線のプロジェクトマネジメント （両利きのPM / Complex Systems）  ## 概要 プロジェクトには2種類のマネジメントが必要。  1. 直線（Linear） 2. 曲線（N",
       "tags": []
     },
     {
-      "path": "06_知識のメモ/経済が「所有」から「貢献ベースの配分」へ.md",
-=======
       "path": "06_知識の海/経済が「所有」から「貢献ベースの配分」へ.md",
->>>>>>> 004f77b (chore: update lightning paths for 知識の海)
       "has_meta": false,
       "char_count": 1192,
       "word_hint": "# 経済が「所有」から「貢献ベースの配分」へ  ## 一行要約 Web3的経済思想は、所有より貢献を重視する新しい倫理観に基づいており、その源流は1970年代のヒッピー文化に遡る。  ## 背景・文脈",
@@ -1379,106 +1371,98 @@
       "tags": []
     },
     {
-<<<<<<< HEAD
-      "path": "06_知識のメモ/🌱AI検索時代のゼロクリック／生成AI流入の実態.md",
+      "path": "06_知識の海/🌱AI検索時代のゼロクリック／生成AI流入の実態.md",
       "has_meta": false,
       "char_count": 2250,
       "word_hint": "# レポート：ヴァリューズ × note 調査   AI検索時代のゼロクリック／生成AI流入の実態  ---  ## 1. 元記事・レポート情報  ### ■ 元記事（note） - **タイトル**",
       "tags": []
     },
     {
-      "path": "06_知識のメモ/🌱LovableとVercelの関係性メモ.md",
+      "path": "06_知識の海/🌱LovableとVercelの関係性メモ.md",
       "has_meta": false,
       "char_count": 1187,
       "word_hint": "# 💭 LovableとVercelの関係性メモ   *作成日: 2025-11-03*   *タグ: #AI開発 #ノーコード #プロトタイピング #Vercel #Lovable #思考Terr",
       "tags": []
     },
     {
-      "path": "06_知識のメモ/🌱Lovableアプリ開発手順_2025-11-03.md",
+      "path": "06_知識の海/🌱Lovableアプリ開発手順_2025-11-03.md",
       "has_meta": false,
       "char_count": 1375,
       "word_hint": "# Lovableアプリ開発手順 - 2025-11-03  ## 🎯 目標 Lovableを使ってノーコードでWebアプリを作成し、開発プロセスを体験する  ## 📋 事前準備 - [ ] ブラ",
       "tags": []
     },
     {
-      "path": "06_知識のメモ/🌱M365Copilot検証ログ_2025-11-13.md",
+      "path": "06_知識の海/🌱M365Copilot検証ログ_2025-11-13.md",
       "has_meta": false,
       "char_count": 10272,
       "word_hint": "# 📊 M365Copilot検証ログ_2025-11-13  --- tags: [検証ログ, M365Copilot, AI活用, 比較分析] created: 2025/11/13 (木曜日)",
       "tags": []
     },
     {
-      "path": "06_知識のメモ/🌱RAG化プロジェクト知見：簡易ベクトル化の予想外の成功_2025-11-24.md",
+      "path": "06_知識の海/🌱RAG化プロジェクト知見：簡易ベクトル化の予想外の成功_2025-11-24.md",
       "has_meta": false,
       "char_count": 2039,
       "word_hint": "# 💡 RAG化プロジェクト知見：簡易ベクトル化の予想外の成功  **作成日**: 2025-11-24 (月曜日) 10:44   **プロジェクト**: 資料DB RAG化 Phase 2   ",
       "tags": []
     },
     {
-      "path": "06_知識のメモ/🌱RAG実装で腹落ちした「チャンク化×ベクトル化」の本質_2025-01-27.md",
+      "path": "06_知識の海/🌱RAG実装で腹落ちした「チャンク化×ベクトル化」の本質_2025-01-27.md",
       "has_meta": false,
       "char_count": 1630,
       "word_hint": "# 💡 RAG実装で腹落ちした「チャンク化×ベクトル化」の本質  **日付**: 2025-01-27   **きっかけ**: Supabase統合でRAGシステムを本格実装  ---  ## 🎯",
       "tags": []
     },
     {
-      "path": "06_知識のメモ/🌱Slack共有用_Agentic Web時代の広告マーケティング変化.md",
+      "path": "06_知識の海/🌱Slack共有用_Agentic Web時代の広告マーケティング変化.md",
       "has_meta": false,
       "char_count": 975,
       "word_hint": "AIエージェントが商品選択を代行する時代が来るという論文「Agentic Web」を読んだので共有です。 広告・マーケティング業界にとって結構インパクトありそう。  ## 🤖 Agentic Web",
       "tags": []
     },
     {
-      "path": "06_知識のメモ/🌱Zenn記事_AI開発ツール3社徹底比較_2025-11-03.md",
+      "path": "06_知識の海/🌱Zenn記事_AI開発ツール3社徹底比較_2025-11-03.md",
       "has_meta": false,
       "char_count": 4690,
       "word_hint": "# 【2025年最新】AI開発ツール3社徹底比較：同じプロンプトで検証してみた ## Lovable vs Bolt.new vs Firebase Studio  ## はじめに  AI開発ツールが",
       "tags": []
     },
     {
-      "path": "06_知識のメモ/🌱obsidianの同期設定.md",
-=======
       "path": "06_知識の海/🌱obsidianの同期設定.md",
->>>>>>> 004f77b (chore: update lightning paths for 知識の海)
       "has_meta": false,
       "char_count": 242,
       "word_hint": "GitHubを中継して各デバイス間で同期が取れる 仕組みとしてはリポジトリの中身をpull&pushしているだけ ただ、慣れていないとセットアップに少し苦労する  1. GitHubに新規リポジトリ追",
       "tags": []
     },
     {
-<<<<<<< HEAD
-      "path": "06_知識のメモ/🌱技術的最適化が生む創造の好循環：GPU高速化の実践知.md",
+      "path": "06_知識の海/🌱技術的最適化が生む創造の好循環：GPU高速化の実践知.md",
       "has_meta": false,
       "char_count": 3435,
       "word_hint": "# 🌱 技術的最適化が生む創造の好循環：GPU高速化の実践知  --- tags: [ローカルAI, GPU高速化, 実用性, 探索の自由, 技術最適化] created: 2025-12-24 s",
       "tags": []
     },
     {
-      "path": "06_知識のメモ/🌱生成AI活用診断レポート.md",
+      "path": "06_知識の海/🌱生成AI活用診断レポート.md",
       "has_meta": false,
       "char_count": 1234,
       "word_hint": "# 生成AI活用診断レポート 2025-11-06   tags: #AI活用 #自己分析 #スキル偏差値    ---  ## 📊 概要 - **診断名**：生成AIビジネス活用力診断   - *",
       "tags": []
     },
     {
-      "path": "06_知識のメモ/🌱自動車業界の未来とトヨタの課題（2025-05-14）.md",
+      "path": "06_知識の海/🌱自動車業界の未来とトヨタの課題（2025-05-14）.md",
       "has_meta": false,
       "char_count": 627,
       "word_hint": "# 自動車業界の未来とトヨタの課題（2025-05-14）  ## 要点まとめ - 日産が約2万人の削減を発表。グローバル再編へ。 - ホンダとの経営統合は破談。背景には企業文化や方針の違い。 - も",
       "tags": []
     },
     {
-      "path": "06_知識のメモ/🌱記事・摩擦レスUX進化史まとめ.md",
+      "path": "06_知識の海/🌱記事・摩擦レスUX進化史まとめ.md",
       "has_meta": false,
       "char_count": 1111,
       "word_hint": "# 記事・摩擦レスUX進化史まとめ  ## 元記事 - タイトル：UI不要のシステムの究極形 - リンク：https://note.com/yos1toshi/n/n8ccd18b8bed1 - 要約",
       "tags": []
     },
     {
-      "path": "06_知識のメモ/🌿リバースナレッジ方法論.md",
-=======
       "path": "06_知識の海/🌿リバースナレッジ方法論.md",
->>>>>>> 004f77b (chore: update lightning paths for 知識の海)
       "has_meta": false,
       "char_count": 1533,
       "word_hint": "# 🌿 リバースナレッジ方法論  --- tags: [知識管理, 方法論, 形式知, 学習する組織] created: 2025-10-22 ---  ## 🎯 問題意識  プロジェクトの成功や",
@@ -1526,7 +1510,7 @@
     {
       "path": "06_知識の海/🧠 コンテキスト・エンジニアリングによるAI協働進化.md",
       "has_meta": false,
-      "char_count": 3047,
+      "char_count": 3046,
       "word_hint": "# 🧠 コンテキスト・エンジニアリングによるAI協働進化  --- tags: [AI協働, システム設計, コンテキスト・エンジニアリング, 価値観ベース, 思考拡張] ---  ## 1. コン",
       "tags": []
     },
