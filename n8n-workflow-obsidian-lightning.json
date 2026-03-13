@@ -45,7 +45,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const targetPaths = ['03_思考の森/', '06_知識のメモ/'];\nconst tree = $input.item.json.tree || [];\n\nconst mdFiles = tree.filter(file => {\n  return file.type === 'blob' &&\n         file.path.endsWith('.md') &&\n         targetPaths.some(path => file.path.startsWith(path));\n});\n\nreturn mdFiles.map(file => ({\n  json: {\n    path: file.path,\n    sha: file.sha,\n    url: `https://api.github.com/repos/nayabashi/Obsidian/contents/${file.path}`\n  }\n}));"
+        "jsCode": "const targetPaths = ['03_思考の森/', '06_知識の海/'];\nconst tree = $input.item.json.tree || [];\n\nconst mdFiles = tree.filter(file => {\n  return file.type === 'blob' &&\n         file.path.endsWith('.md') &&\n         targetPaths.some(path => file.path.startsWith(path));\n});\n\nreturn mdFiles.map(file => ({\n  json: {\n    path: file.path,\n    sha: file.sha,\n    url: `https://api.github.com/repos/nayabashi/Obsidian/contents/${file.path}`\n  }\n}));"
       },
       "name": "Filter Target Files",
       "type": "n8n-nodes-base.code",

@@ -74,7 +74,7 @@ Schedule Trigger (毎日2:00)
   ↓
 Get Repository Tree (Obsidianリポジトリ全体取得)
   ↓
-Filter Target Files (03_思考の森, 06_知識のメモのみ抽出)
+Filter Target Files (03_思考の森, 06_知識の海のみ抽出)
   ↓
 Get File Content (ファイル内容取得)
   ↓
@@ -179,7 +179,7 @@ Filter Target Filesノードの `targetPaths` を編集：
 ```javascript
 const targetPaths = [
   '03_思考の森/',
-  '06_知識のメモ/',
+  '06_知識の海/',
   '01_Inbox/'  // 追加
 ];
 ```
@@ -187,7 +187,7 @@ const targetPaths = [
 ### 処理ファイル数の確認
 
 現在の構成（直線処理）:
-- **219ファイル**: 03_思考の森/ (144件) + 06_知識のメモ/ (75件)
+- **219ファイル**: 03_思考の森/ (144件) + 06_知識の海/ (75件)
 - **処理結果**: Extract Metadataの`$input.all()`ループ処理により、全件を一度に処理
 - **成功実績**: 2026-02-07に219件処理完了
 
