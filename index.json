@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-03-31T17:00:03.993Z",
+  "generated_at": "2026-04-01T17:00:04.339Z",
   "source": "nayabashi/Obsidian",
-  "total_notes": 113,
+  "total_notes": 114,
   "notes": [
     {
       "path": "03_思考の森/2025-05-07 価値観チェックイン.md",
@@ -273,6 +273,13 @@
       "tags": []
     },
     {
+      "path": "03_思考の森/🌱二層記録設計：Judgment Case と Knowledge Graph を競合させず接続する.md",
+      "has_meta": false,
+      "char_count": 2342,
+      "word_hint": "# 🌱二層記録設計：Judgment Case と Knowledge Graph を競合させず接続する  --- tags: [AI活用, システム設計, 判断設計, KnowledgeGraph",
+      "tags": []
+    },
+    {
       "path": "03_思考の森/🌱半径3メートルから変えるストア派的変革.md",
       "has_meta": false,
       "char_count": 595,
@@ -337,8 +344,8 @@
     {
       "path": "03_思考の森/🌱診断性ファースト設計：ホームポジションを守るAI協働環境の条件.md",
       "has_meta": false,
-      "char_count": 2064,
-      "word_hint": "# 🌱診断性ファースト設計：ホームポジションを守るAI協働環境の条件  --- tags: [AI活用, システム設計, ホームポジション, 診断性, 持続可能性, AI下書き] created: ",
+      "char_count": 2304,
+      "word_hint": "# 🌱診断性ファースト設計：ホームポジションを守るAI協働環境の条件  --- tags: [AI活用, システム設計, ホームポジション, 診断性, 持続可能性] created: 2026-03",
       "tags": []
     },
     {
